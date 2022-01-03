@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.one.ssm.admin.user.mapper.UserLoginMapper">
+  <resultMap id="BaseResultMap" type="com.one.ssm.admin.user.model.UserLogin">
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="account_type" jdbcType="CHAR" property="accountType" />
+    <result column="current_password" jdbcType="VARCHAR" property="currentPassword" />
+    <result column="current_password2" jdbcType="VARCHAR" property="currentPassword2" />
+    <result column="password_hint" jdbcType="INTEGER" property="passwordHint" />
+    <result column="password_require_change" jdbcType="CHAR" property="passwordRequireChange" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="last_name" jdbcType="VARCHAR" property="lastName" />
+    <result column="first_name" jdbcType="VARCHAR" property="firstName" />
+    <result column="is_internal" jdbcType="CHAR" property="isInternal" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="mobile_country_code" jdbcType="VARCHAR" property="mobileCountryCode" />
+    <result column="user_type" jdbcType="CHAR" property="userType" />
+    <result column="has_logged_out" jdbcType="CHAR" property="hasLoggedOut" />
+    <result column="last_locale" jdbcType="VARCHAR" property="lastLocale" />
+    <result column="last_time_zone" jdbcType="VARCHAR" property="lastTimeZone" />
+    <result column="current_status" jdbcType="CHAR" property="currentStatus" />
+    <result column="disabled_time" jdbcType="TIMESTAMP" property="disabledTime" />
+    <result column="disabled_by" jdbcType="VARCHAR" property="disabledBy" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="created_user_login_id" jdbcType="VARCHAR" property="createdUserLoginId" />
+    <result column="last_updated_time" jdbcType="TIMESTAMP" property="lastUpdatedTime" />
+    <result column="last_updated_user_login_id" jdbcType="VARCHAR" property="lastUpdatedUserLoginId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    user_id, account_type, current_password, current_password2, password_hint, password_require_change, 
+    user_name, last_name, first_name, is_internal, email, mobile, mobile_country_code, 
+    user_type, has_logged_out, last_locale, last_time_zone, current_status, disabled_time, 
+    disabled_by, created_time, created_user_login_id, last_updated_time, last_updated_user_login_id
+  </sql>
+  <select id="selectByExample" parameterType="com.one.ssm.admin.user.model.UserLoginExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_login
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_login
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_login
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.one.ssm.admin.user.model.UserLoginExample">
+    delete from user_login
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.one.ssm.admin.user.model.UserLogin">
+    insert into user_login (user_id, account_type, current_password, 
+      current_password2, password_hint, password_require_change, 
+      user_name, last_name, first_name, 
+      is_internal, email, mobile, 
+      mobile_country_code, user_type, has_logged_out, 
+      last_locale, last_time_zone, current_status, 
+      disabled_time, disabled_by, created_time, 
+      created_user_login_id, last_updated_time, 
+      last_updated_user_login_id)
+    values (#{userId,jdbcType=INTEGER}, #{accountType,jdbcType=CHAR}, #{currentPassword,jdbcType=VARCHAR}, 
+      #{currentPassword2,jdbcType=VARCHAR}, #{passwordHint,jdbcType=INTEGER}, #{passwordRequireChange,jdbcType=CHAR}, 
+      #{userName,jdbcType=VARCHAR}, #{lastName,jdbcType=VARCHAR}, #{firstName,jdbcType=VARCHAR}, 
+      #{isInternal,jdbcType=CHAR}, #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{mobileCountryCode,jdbcType=VARCHAR}, #{userType,jdbcType=CHAR}, #{hasLoggedOut,jdbcType=CHAR}, 
+      #{lastLocale,jdbcType=VARCHAR}, #{lastTimeZone,jdbcType=VARCHAR}, #{currentStatus,jdbcType=CHAR}, 
+      #{disabledTime,jdbcType=TIMESTAMP}, #{disabledBy,jdbcType=VARCHAR}, #{createdTime,jdbcType=TIMESTAMP}, 
+      #{createdUserLoginId,jdbcType=VARCHAR}, #{lastUpdatedTime,jdbcType=TIMESTAMP}, 
+      #{lastUpdatedUserLoginId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.one.ssm.admin.user.model.UserLogin">
+    insert into user_login
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="accountType != null">
+        account_type,
+      </if>
+      <if test="currentPassword != null">
+        current_password,
+      </if>
+      <if test="currentPassword2 != null">
+        current_password2,
+      </if>
+      <if test="passwordHint != null">
+        password_hint,
+      </if>
+      <if test="passwordRequireChange != null">
+        password_require_change,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="lastName != null">
+        last_name,
+      </if>
+      <if test="firstName != null">
+        first_name,
+      </if>
+      <if test="isInternal != null">
+        is_internal,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="mobileCountryCode != null">
+        mobile_country_code,
+      </if>
+      <if test="userType != null">
+        user_type,
+      </if>
+      <if test="hasLoggedOut != null">
+        has_logged_out,
+      </if>
+      <if test="lastLocale != null">
+        last_locale,
+      </if>
+      <if test="lastTimeZone != null">
+        last_time_zone,
+      </if>
+      <if test="currentStatus != null">
+        current_status,
+      </if>
+      <if test="disabledTime != null">
+        disabled_time,
+      </if>
+      <if test="disabledBy != null">
+        disabled_by,
+      </if>
+      <if test="createdTime != null">
+        created_time,
+      </if>
+      <if test="createdUserLoginId != null">
+        created_user_login_id,
+      </if>
+      <if test="lastUpdatedTime != null">
+        last_updated_time,
+      </if>
+      <if test="lastUpdatedUserLoginId != null">
+        last_updated_user_login_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="accountType != null">
+        #{accountType,jdbcType=CHAR},
+      </if>
+      <if test="currentPassword != null">
+        #{currentPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="currentPassword2 != null">
+        #{currentPassword2,jdbcType=VARCHAR},
+      </if>
+      <if test="passwordHint != null">
+        #{passwordHint,jdbcType=INTEGER},
+      </if>
+      <if test="passwordRequireChange != null">
+        #{passwordRequireChange,jdbcType=CHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastName != null">
+        #{lastName,jdbcType=VARCHAR},
+      </if>
+      <if test="firstName != null">
+        #{firstName,jdbcType=VARCHAR},
+      </if>
+      <if test="isInternal != null">
+        #{isInternal,jdbcType=CHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileCountryCode != null">
+        #{mobileCountryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null">
+        #{userType,jdbcType=CHAR},
+      </if>
+      <if test="hasLoggedOut != null">
+        #{hasLoggedOut,jdbcType=CHAR},
+      </if>
+      <if test="lastLocale != null">
+        #{lastLocale,jdbcType=VARCHAR},
+      </if>
+      <if test="lastTimeZone != null">
+        #{lastTimeZone,jdbcType=VARCHAR},
+      </if>
+      <if test="currentStatus != null">
+        #{currentStatus,jdbcType=CHAR},
+      </if>
+      <if test="disabledTime != null">
+        #{disabledTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="disabledBy != null">
+        #{disabledBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdUserLoginId != null">
+        #{createdUserLoginId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedTime != null">
+        #{lastUpdatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdatedUserLoginId != null">
+        #{lastUpdatedUserLoginId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.one.ssm.admin.user.model.UserLoginExample" resultType="java.lang.Long">
+    select count(*) from user_login
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user_login
+    <set>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.accountType != null">
+        account_type = #{record.accountType,jdbcType=CHAR},
+      </if>
+      <if test="record.currentPassword != null">
+        current_password = #{record.currentPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.currentPassword2 != null">
+        current_password2 = #{record.currentPassword2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.passwordHint != null">
+        password_hint = #{record.passwordHint,jdbcType=INTEGER},
+      </if>
+      <if test="record.passwordRequireChange != null">
+        password_require_change = #{record.passwordRequireChange,jdbcType=CHAR},
+      </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastName != null">
+        last_name = #{record.lastName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstName != null">
+        first_name = #{record.firstName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isInternal != null">
+        is_internal = #{record.isInternal,jdbcType=CHAR},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null">
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobileCountryCode != null">
+        mobile_country_code = #{record.mobileCountryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userType != null">
+        user_type = #{record.userType,jdbcType=CHAR},
+      </if>
+      <if test="record.hasLoggedOut != null">
+        has_logged_out = #{record.hasLoggedOut,jdbcType=CHAR},
+      </if>
+      <if test="record.lastLocale != null">
+        last_locale = #{record.lastLocale,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastTimeZone != null">
+        last_time_zone = #{record.lastTimeZone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.currentStatus != null">
+        current_status = #{record.currentStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.disabledTime != null">
+        disabled_time = #{record.disabledTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.disabledBy != null">
+        disabled_by = #{record.disabledBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdTime != null">
+        created_time = #{record.createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createdUserLoginId != null">
+        created_user_login_id = #{record.createdUserLoginId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastUpdatedTime != null">
+        last_updated_time = #{record.lastUpdatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdatedUserLoginId != null">
+        last_updated_user_login_id = #{record.lastUpdatedUserLoginId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user_login
+    set user_id = #{record.userId,jdbcType=INTEGER},
+      account_type = #{record.accountType,jdbcType=CHAR},
+      current_password = #{record.currentPassword,jdbcType=VARCHAR},
+      current_password2 = #{record.currentPassword2,jdbcType=VARCHAR},
+      password_hint = #{record.passwordHint,jdbcType=INTEGER},
+      password_require_change = #{record.passwordRequireChange,jdbcType=CHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      last_name = #{record.lastName,jdbcType=VARCHAR},
+      first_name = #{record.firstName,jdbcType=VARCHAR},
+      is_internal = #{record.isInternal,jdbcType=CHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      mobile_country_code = #{record.mobileCountryCode,jdbcType=VARCHAR},
+      user_type = #{record.userType,jdbcType=CHAR},
+      has_logged_out = #{record.hasLoggedOut,jdbcType=CHAR},
+      last_locale = #{record.lastLocale,jdbcType=VARCHAR},
+      last_time_zone = #{record.lastTimeZone,jdbcType=VARCHAR},
+      current_status = #{record.currentStatus,jdbcType=CHAR},
+      disabled_time = #{record.disabledTime,jdbcType=TIMESTAMP},
+      disabled_by = #{record.disabledBy,jdbcType=VARCHAR},
+      created_time = #{record.createdTime,jdbcType=TIMESTAMP},
+      created_user_login_id = #{record.createdUserLoginId,jdbcType=VARCHAR},
+      last_updated_time = #{record.lastUpdatedTime,jdbcType=TIMESTAMP},
+      last_updated_user_login_id = #{record.lastUpdatedUserLoginId,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.one.ssm.admin.user.model.UserLogin">
+    update user_login
+    <set>
+      <if test="accountType != null">
+        account_type = #{accountType,jdbcType=CHAR},
+      </if>
+      <if test="currentPassword != null">
+        current_password = #{currentPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="currentPassword2 != null">
+        current_password2 = #{currentPassword2,jdbcType=VARCHAR},
+      </if>
+      <if test="passwordHint != null">
+        password_hint = #{passwordHint,jdbcType=INTEGER},
+      </if>
+      <if test="passwordRequireChange != null">
+        password_require_change = #{passwordRequireChange,jdbcType=CHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="lastName != null">
+        last_name = #{lastName,jdbcType=VARCHAR},
+      </if>
+      <if test="firstName != null">
+        first_name = #{firstName,jdbcType=VARCHAR},
+      </if>
+      <if test="isInternal != null">
+        is_internal = #{isInternal,jdbcType=CHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileCountryCode != null">
+        mobile_country_code = #{mobileCountryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null">
+        user_type = #{userType,jdbcType=CHAR},
+      </if>
+      <if test="hasLoggedOut != null">
+        has_logged_out = #{hasLoggedOut,jdbcType=CHAR},
+      </if>
+      <if test="lastLocale != null">
+        last_locale = #{lastLocale,jdbcType=VARCHAR},
+      </if>
+      <if test="lastTimeZone != null">
+        last_time_zone = #{lastTimeZone,jdbcType=VARCHAR},
+      </if>
+      <if test="currentStatus != null">
+        current_status = #{currentStatus,jdbcType=CHAR},
+      </if>
+      <if test="disabledTime != null">
+        disabled_time = #{disabledTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="disabledBy != null">
+        disabled_by = #{disabledBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdUserLoginId != null">
+        created_user_login_id = #{createdUserLoginId,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdatedTime != null">
+        last_updated_time = #{lastUpdatedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdatedUserLoginId != null">
+        last_updated_user_login_id = #{lastUpdatedUserLoginId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.one.ssm.admin.user.model.UserLogin">
+    update user_login
+    set account_type = #{accountType,jdbcType=CHAR},
+      current_password = #{currentPassword,jdbcType=VARCHAR},
+      current_password2 = #{currentPassword2,jdbcType=VARCHAR},
+      password_hint = #{passwordHint,jdbcType=INTEGER},
+      password_require_change = #{passwordRequireChange,jdbcType=CHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      last_name = #{lastName,jdbcType=VARCHAR},
+      first_name = #{firstName,jdbcType=VARCHAR},
+      is_internal = #{isInternal,jdbcType=CHAR},
+      email = #{email,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      mobile_country_code = #{mobileCountryCode,jdbcType=VARCHAR},
+      user_type = #{userType,jdbcType=CHAR},
+      has_logged_out = #{hasLoggedOut,jdbcType=CHAR},
+      last_locale = #{lastLocale,jdbcType=VARCHAR},
+      last_time_zone = #{lastTimeZone,jdbcType=VARCHAR},
+      current_status = #{currentStatus,jdbcType=CHAR},
+      disabled_time = #{disabledTime,jdbcType=TIMESTAMP},
+      disabled_by = #{disabledBy,jdbcType=VARCHAR},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      created_user_login_id = #{createdUserLoginId,jdbcType=VARCHAR},
+      last_updated_time = #{lastUpdatedTime,jdbcType=TIMESTAMP},
+      last_updated_user_login_id = #{lastUpdatedUserLoginId,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>

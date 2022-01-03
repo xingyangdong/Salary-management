@@ -1,0 +1,23 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "588161",
+      "name": "部门",
+      "font_class": "bumen",
+      "unicode": "e6ae",
+      "unicode_decimal": 59054
+    },
+    {
+      "icon_id": "1680681",
+      "name": "员工管理",
+      "font_class": "yuangongguanli",
+      "unicode": "e660",
+      "unicode_decimal": 58976
+    }
+  ]
+}

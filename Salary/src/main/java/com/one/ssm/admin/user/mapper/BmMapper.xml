@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.one.ssm.admin.user.mapper.BmMapper">
+  <resultMap id="BaseResultMap" type="com.one.ssm.admin.user.model.Bm">
+    <id column="bm_id" jdbcType="INTEGER" property="bmId" />
+    <result column="bm_time" jdbcType="VARCHAR" property="bmTime" />
+    <result column="bm_fuze" jdbcType="VARCHAR" property="bmFuze" />
+    <result column="bm_name" jdbcType="VARCHAR" property="bmName" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    bm_id, bm_time, bm_fuze, bm_name
+  </sql>
+  <select id="selectByExample" parameterType="com.one.ssm.admin.user.model.BmExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bm
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bm
+    where bm_id = #{bmId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from bm
+    where bm_id = #{bmId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.one.ssm.admin.user.model.BmExample">
+    delete from bm
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.one.ssm.admin.user.model.Bm">
+    insert into bm (bm_id, bm_time, bm_fuze, 
+      bm_name)
+    values (#{bmId,jdbcType=INTEGER}, #{bmTime,jdbcType=VARCHAR}, #{bmFuze,jdbcType=VARCHAR}, 
+      #{bmName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.one.ssm.admin.user.model.Bm">
+    insert into bm
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bmId != null">
+        bm_id,
+      </if>
+      <if test="bmTime != null">
+        bm_time,
+      </if>
+      <if test="bmFuze != null">
+        bm_fuze,
+      </if>
+      <if test="bmName != null">
+        bm_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bmId != null">
+        #{bmId,jdbcType=INTEGER},
+      </if>
+      <if test="bmTime != null">
+        #{bmTime,jdbcType=VARCHAR},
+      </if>
+      <if test="bmFuze != null">
+        #{bmFuze,jdbcType=VARCHAR},
+      </if>
+      <if test="bmName != null">
+        #{bmName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.one.ssm.admin.user.model.BmExample" resultType="java.lang.Long">
+    select count(*) from bm
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update bm
+    <set>
+      <if test="record.bmId != null">
+        bm_id = #{record.bmId,jdbcType=INTEGER},
+      </if>
+      <if test="record.bmTime != null">
+        bm_time = #{record.bmTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bmFuze != null">
+        bm_fuze = #{record.bmFuze,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bmName != null">
+        bm_name = #{record.bmName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update bm
+    set bm_id = #{record.bmId,jdbcType=INTEGER},
+      bm_time = #{record.bmTime,jdbcType=VARCHAR},
+      bm_fuze = #{record.bmFuze,jdbcType=VARCHAR},
+      bm_name = #{record.bmName,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.one.ssm.admin.user.model.Bm">
+    update bm
+    <set>
+      <if test="bmTime != null">
+        bm_time = #{bmTime,jdbcType=VARCHAR},
+      </if>
+      <if test="bmFuze != null">
+        bm_fuze = #{bmFuze,jdbcType=VARCHAR},
+      </if>
+      <if test="bmName != null">
+        bm_name = #{bmName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where bm_id = #{bmId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.one.ssm.admin.user.model.Bm">
+    update bm
+    set bm_time = #{bmTime,jdbcType=VARCHAR},
+      bm_fuze = #{bmFuze,jdbcType=VARCHAR},
+      bm_name = #{bmName,jdbcType=VARCHAR}
+    where bm_id = #{bmId,jdbcType=INTEGER}
+  </update>
+</mapper>

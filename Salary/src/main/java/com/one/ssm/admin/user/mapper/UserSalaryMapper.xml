@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.one.ssm.admin.user.mapper.UserSalaryMapper">
+  <resultMap id="BaseResultMap" type="com.one.ssm.admin.user.model.UserSalary">
+    <id column="sa_id" jdbcType="BIGINT" property="saId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="xingzhi" jdbcType="VARCHAR" property="xingzhi" />
+    <result column="bumen_name" jdbcType="VARCHAR" property="bumenName" />
+    <result column="bumen" jdbcType="VARCHAR" property="bumen" />
+    <result column="sa_jiben" jdbcType="VARCHAR" property="saJiben" />
+    <result column="sa_shiye" jdbcType="VARCHAR" property="saShiye" />
+    <result column="sa_gongjijin" jdbcType="VARCHAR" property="saGongjijin" />
+    <result column="sa_yangliao" jdbcType="VARCHAR" property="saYangliao" />
+    <result column="sa_shenyu" jdbcType="VARCHAR" property="saShenyu" />
+    <result column="sa_gongshang" jdbcType="VARCHAR" property="saGongshang" />
+    <result column="sa_yiliao" jdbcType="VARCHAR" property="saYiliao" />
+    <result column="sa_jiangjin" jdbcType="VARCHAR" property="saJiangjin" />
+    <result column="sa_fakuan" jdbcType="VARCHAR" property="saFakuan" />
+    <result column="sa_nashui" jdbcType="VARCHAR" property="saNashui" />
+    <result column="sa_zongshu" jdbcType="VARCHAR" property="saZongshu" />
+    <result column="shifa" jdbcType="VARCHAR" property="shifa" />
+    <result column="sa_zhuangtai" jdbcType="VARCHAR" property="saZhuangtai" />
+    <result column="sa_time" jdbcType="VARCHAR" property="saTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    sa_id, user_id, user_name, xingzhi, bumen_name, bumen, sa_jiben, sa_shiye, sa_gongjijin, 
+    sa_yangliao, sa_shenyu, sa_gongshang, sa_yiliao, sa_jiangjin, sa_fakuan, sa_nashui, 
+    sa_zongshu, shifa, sa_zhuangtai, sa_time
+  </sql>
+  <select id="selectByExample" parameterType="com.one.ssm.admin.user.model.UserSalaryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_salary
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_salary
+    where sa_id = #{saId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from user_salary
+    where sa_id = #{saId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.one.ssm.admin.user.model.UserSalaryExample">
+    delete from user_salary
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.one.ssm.admin.user.model.UserSalary">
+    insert into user_salary (sa_id, user_id, user_name, 
+      xingzhi, bumen_name, bumen, 
+      sa_jiben, sa_shiye, sa_gongjijin, 
+      sa_yangliao, sa_shenyu, sa_gongshang, 
+      sa_yiliao, sa_jiangjin, sa_fakuan, 
+      sa_nashui, sa_zongshu, shifa, 
+      sa_zhuangtai, sa_time)
+    values (#{saId,jdbcType=BIGINT}, #{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{xingzhi,jdbcType=VARCHAR}, #{bumenName,jdbcType=VARCHAR}, #{bumen,jdbcType=VARCHAR}, 
+      #{saJiben,jdbcType=VARCHAR}, #{saShiye,jdbcType=VARCHAR}, #{saGongjijin,jdbcType=VARCHAR}, 
+      #{saYangliao,jdbcType=VARCHAR}, #{saShenyu,jdbcType=VARCHAR}, #{saGongshang,jdbcType=VARCHAR}, 
+      #{saYiliao,jdbcType=VARCHAR}, #{saJiangjin,jdbcType=VARCHAR}, #{saFakuan,jdbcType=VARCHAR}, 
+      #{saNashui,jdbcType=VARCHAR}, #{saZongshu,jdbcType=VARCHAR}, #{shifa,jdbcType=VARCHAR}, 
+      #{saZhuangtai,jdbcType=VARCHAR}, #{saTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.one.ssm.admin.user.model.UserSalary">
+    insert into user_salary
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="saId != null">
+        sa_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="xingzhi != null">
+        xingzhi,
+      </if>
+      <if test="bumenName != null">
+        bumen_name,
+      </if>
+      <if test="bumen != null">
+        bumen,
+      </if>
+      <if test="saJiben != null">
+        sa_jiben,
+      </if>
+      <if test="saShiye != null">
+        sa_shiye,
+      </if>
+      <if test="saGongjijin != null">
+        sa_gongjijin,
+      </if>
+      <if test="saYangliao != null">
+        sa_yangliao,
+      </if>
+      <if test="saShenyu != null">
+        sa_shenyu,
+      </if>
+      <if test="saGongshang != null">
+        sa_gongshang,
+      </if>
+      <if test="saYiliao != null">
+        sa_yiliao,
+      </if>
+      <if test="saJiangjin != null">
+        sa_jiangjin,
+      </if>
+      <if test="saFakuan != null">
+        sa_fakuan,
+      </if>
+      <if test="saNashui != null">
+        sa_nashui,
+      </if>
+      <if test="saZongshu != null">
+        sa_zongshu,
+      </if>
+      <if test="shifa != null">
+        shifa,
+      </if>
+      <if test="saZhuangtai != null">
+        sa_zhuangtai,
+      </if>
+      <if test="saTime != null">
+        sa_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="saId != null">
+        #{saId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="xingzhi != null">
+        #{xingzhi,jdbcType=VARCHAR},
+      </if>
+      <if test="bumenName != null">
+        #{bumenName,jdbcType=VARCHAR},
+      </if>
+      <if test="bumen != null">
+        #{bumen,jdbcType=VARCHAR},
+      </if>
+      <if test="saJiben != null">
+        #{saJiben,jdbcType=VARCHAR},
+      </if>
+      <if test="saShiye != null">
+        #{saShiye,jdbcType=VARCHAR},
+      </if>
+      <if test="saGongjijin != null">
+        #{saGongjijin,jdbcType=VARCHAR},
+      </if>
+      <if test="saYangliao != null">
+        #{saYangliao,jdbcType=VARCHAR},
+      </if>
+      <if test="saShenyu != null">
+        #{saShenyu,jdbcType=VARCHAR},
+      </if>
+      <if test="saGongshang != null">
+        #{saGongshang,jdbcType=VARCHAR},
+      </if>
+      <if test="saYiliao != null">
+        #{saYiliao,jdbcType=VARCHAR},
+      </if>
+      <if test="saJiangjin != null">
+        #{saJiangjin,jdbcType=VARCHAR},
+      </if>
+      <if test="saFakuan != null">
+        #{saFakuan,jdbcType=VARCHAR},
+      </if>
+      <if test="saNashui != null">
+        #{saNashui,jdbcType=VARCHAR},
+      </if>
+      <if test="saZongshu != null">
+        #{saZongshu,jdbcType=VARCHAR},
+      </if>
+      <if test="shifa != null">
+        #{shifa,jdbcType=VARCHAR},
+      </if>
+      <if test="saZhuangtai != null">
+        #{saZhuangtai,jdbcType=VARCHAR},
+      </if>
+      <if test="saTime != null">
+        #{saTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.one.ssm.admin.user.model.UserSalaryExample" resultType="java.lang.Long">
+    select count(*) from user_salary
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user_salary
+    <set>
+      <if test="record.saId != null">
+        sa_id = #{record.saId,jdbcType=BIGINT},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xingzhi != null">
+        xingzhi = #{record.xingzhi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bumenName != null">
+        bumen_name = #{record.bumenName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bumen != null">
+        bumen = #{record.bumen,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saJiben != null">
+        sa_jiben = #{record.saJiben,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saShiye != null">
+        sa_shiye = #{record.saShiye,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saGongjijin != null">
+        sa_gongjijin = #{record.saGongjijin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saYangliao != null">
+        sa_yangliao = #{record.saYangliao,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saShenyu != null">
+        sa_shenyu = #{record.saShenyu,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saGongshang != null">
+        sa_gongshang = #{record.saGongshang,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saYiliao != null">
+        sa_yiliao = #{record.saYiliao,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saJiangjin != null">
+        sa_jiangjin = #{record.saJiangjin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saFakuan != null">
+        sa_fakuan = #{record.saFakuan,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saNashui != null">
+        sa_nashui = #{record.saNashui,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saZongshu != null">
+        sa_zongshu = #{record.saZongshu,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shifa != null">
+        shifa = #{record.shifa,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saZhuangtai != null">
+        sa_zhuangtai = #{record.saZhuangtai,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saTime != null">
+        sa_time = #{record.saTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user_salary
+    set sa_id = #{record.saId,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      xingzhi = #{record.xingzhi,jdbcType=VARCHAR},
+      bumen_name = #{record.bumenName,jdbcType=VARCHAR},
+      bumen = #{record.bumen,jdbcType=VARCHAR},
+      sa_jiben = #{record.saJiben,jdbcType=VARCHAR},
+      sa_shiye = #{record.saShiye,jdbcType=VARCHAR},
+      sa_gongjijin = #{record.saGongjijin,jdbcType=VARCHAR},
+      sa_yangliao = #{record.saYangliao,jdbcType=VARCHAR},
+      sa_shenyu = #{record.saShenyu,jdbcType=VARCHAR},
+      sa_gongshang = #{record.saGongshang,jdbcType=VARCHAR},
+      sa_yiliao = #{record.saYiliao,jdbcType=VARCHAR},
+      sa_jiangjin = #{record.saJiangjin,jdbcType=VARCHAR},
+      sa_fakuan = #{record.saFakuan,jdbcType=VARCHAR},
+      sa_nashui = #{record.saNashui,jdbcType=VARCHAR},
+      sa_zongshu = #{record.saZongshu,jdbcType=VARCHAR},
+      shifa = #{record.shifa,jdbcType=VARCHAR},
+      sa_zhuangtai = #{record.saZhuangtai,jdbcType=VARCHAR},
+      sa_time = #{record.saTime,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.one.ssm.admin.user.model.UserSalary">
+    update user_salary
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="xingzhi != null">
+        xingzhi = #{xingzhi,jdbcType=VARCHAR},
+      </if>
+      <if test="bumenName != null">
+        bumen_name = #{bumenName,jdbcType=VARCHAR},
+      </if>
+      <if test="bumen != null">
+        bumen = #{bumen,jdbcType=VARCHAR},
+      </if>
+      <if test="saJiben != null">
+        sa_jiben = #{saJiben,jdbcType=VARCHAR},
+      </if>
+      <if test="saShiye != null">
+        sa_shiye = #{saShiye,jdbcType=VARCHAR},
+      </if>
+      <if test="saGongjijin != null">
+        sa_gongjijin = #{saGongjijin,jdbcType=VARCHAR},
+      </if>
+      <if test="saYangliao != null">
+        sa_yangliao = #{saYangliao,jdbcType=VARCHAR},
+      </if>
+      <if test="saShenyu != null">
+        sa_shenyu = #{saShenyu,jdbcType=VARCHAR},
+      </if>
+      <if test="saGongshang != null">
+        sa_gongshang = #{saGongshang,jdbcType=VARCHAR},
+      </if>
+      <if test="saYiliao != null">
+        sa_yiliao = #{saYiliao,jdbcType=VARCHAR},
+      </if>
+      <if test="saJiangjin != null">
+        sa_jiangjin = #{saJiangjin,jdbcType=VARCHAR},
+      </if>
+      <if test="saFakuan != null">
+        sa_fakuan = #{saFakuan,jdbcType=VARCHAR},
+      </if>
+      <if test="saNashui != null">
+        sa_nashui = #{saNashui,jdbcType=VARCHAR},
+      </if>
+      <if test="saZongshu != null">
+        sa_zongshu = #{saZongshu,jdbcType=VARCHAR},
+      </if>
+      <if test="shifa != null">
+        shifa = #{shifa,jdbcType=VARCHAR},
+      </if>
+      <if test="saZhuangtai != null">
+        sa_zhuangtai = #{saZhuangtai,jdbcType=VARCHAR},
+      </if>
+      <if test="saTime != null">
+        sa_time = #{saTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sa_id = #{saId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.one.ssm.admin.user.model.UserSalary">
+    update user_salary
+    set user_id = #{userId,jdbcType=INTEGER},
+      user_name = #{userName,jdbcType=VARCHAR},
+      xingzhi = #{xingzhi,jdbcType=VARCHAR},
+      bumen_name = #{bumenName,jdbcType=VARCHAR},
+      bumen = #{bumen,jdbcType=VARCHAR},
+      sa_jiben = #{saJiben,jdbcType=VARCHAR},
+      sa_shiye = #{saShiye,jdbcType=VARCHAR},
+      sa_gongjijin = #{saGongjijin,jdbcType=VARCHAR},
+      sa_yangliao = #{saYangliao,jdbcType=VARCHAR},
+      sa_shenyu = #{saShenyu,jdbcType=VARCHAR},
+      sa_gongshang = #{saGongshang,jdbcType=VARCHAR},
+      sa_yiliao = #{saYiliao,jdbcType=VARCHAR},
+      sa_jiangjin = #{saJiangjin,jdbcType=VARCHAR},
+      sa_fakuan = #{saFakuan,jdbcType=VARCHAR},
+      sa_nashui = #{saNashui,jdbcType=VARCHAR},
+      sa_zongshu = #{saZongshu,jdbcType=VARCHAR},
+      shifa = #{shifa,jdbcType=VARCHAR},
+      sa_zhuangtai = #{saZhuangtai,jdbcType=VARCHAR},
+      sa_time = #{saTime,jdbcType=VARCHAR}
+    where sa_id = #{saId,jdbcType=BIGINT}
+  </update>
+</mapper>

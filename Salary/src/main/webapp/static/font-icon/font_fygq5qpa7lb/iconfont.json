@@ -1,0 +1,72 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1001191",
+      "name": "员工信息",
+      "font_class": "iconyggl",
+      "unicode": "e631",
+      "unicode_decimal": 58929
+    },
+    {
+      "icon_id": "1274578",
+      "name": "其他",
+      "font_class": "qita",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "2959020",
+      "name": "公告管理",
+      "font_class": "gonggaoguanli",
+      "unicode": "e61c",
+      "unicode_decimal": 58908
+    },
+    {
+      "icon_id": "8387821",
+      "name": "工资管理",
+      "font_class": "gongziguanli",
+      "unicode": "e6a7",
+      "unicode_decimal": 59047
+    },
+    {
+      "icon_id": "10363523",
+      "name": "下属绩效管理",
+      "font_class": "xiashujixiaoguanli",
+      "unicode": "e627",
+      "unicode_decimal": 58919
+    },
+    {
+      "icon_id": "12473596",
+      "name": "系统管理",
+      "font_class": "xitongguanli",
+      "unicode": "e619",
+      "unicode_decimal": 58905
+    },
+    {
+      "icon_id": "16142235",
+      "name": "员工管理",
+      "font_class": "huaban37",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "17029929",
+      "name": "申诉",
+      "font_class": "shensu",
+      "unicode": "e692",
+      "unicode_decimal": 59026
+    },
+    {
+      "icon_id": "20051009",
+      "name": "账户管理",
+      "font_class": "zhanghuguanli",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    }
+  ]
+}

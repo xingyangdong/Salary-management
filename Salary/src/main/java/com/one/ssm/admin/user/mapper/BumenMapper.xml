@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.one.ssm.admin.user.mapper.BumenMapper">
+  <resultMap id="BaseResultMap" type="com.one.ssm.admin.user.model.Bumen">
+    <id column="bumen_id" jdbcType="INTEGER" property="bumenId" />
+    <result column="bumen_name" jdbcType="VARCHAR" property="bumenName" />
+    <result column="bumen_zhicheng" jdbcType="VARCHAR" property="bumenZhicheng" />
+    <result column="bumen_renshu" jdbcType="INTEGER" property="bumenRenshu" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    bumen_id, bumen_name, bumen_zhicheng, bumen_renshu
+  </sql>
+  <select id="selectByExample" parameterType="com.one.ssm.admin.user.model.BumenExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bumen
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bumen
+    where bumen_id = #{bumenId,jdbcType=INTEGER}
+  </select>
+  <select id="select" parameterType="list" resultType="string">
+    select
+    bumen_name
+    from bumen
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from bumen
+    where bumen_id = #{bumenId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.one.ssm.admin.user.model.BumenExample">
+    delete from bumen
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.one.ssm.admin.user.model.Bumen">
+    insert into bumen (bumen_id, bumen_name, bumen_zhicheng, 
+      bumen_renshu)
+    values (#{bumenId,jdbcType=INTEGER}, #{bumenName,jdbcType=VARCHAR}, #{bumenZhicheng,jdbcType=VARCHAR}, 
+      #{bumenRenshu,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.one.ssm.admin.user.model.Bumen">
+    insert into bumen
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bumenId != null">
+        bumen_id,
+      </if>
+      <if test="bumenName != null">
+        bumen_name,
+      </if>
+      <if test="bumenZhicheng != null">
+        bumen_zhicheng,
+      </if>
+      <if test="bumenRenshu != null">
+        bumen_renshu,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bumenId != null">
+        #{bumenId,jdbcType=INTEGER},
+      </if>
+      <if test="bumenName != null">
+        #{bumenName,jdbcType=VARCHAR},
+      </if>
+      <if test="bumenZhicheng != null">
+        #{bumenZhicheng,jdbcType=VARCHAR},
+      </if>
+      <if test="bumenRenshu != null">
+        #{bumenRenshu,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.one.ssm.admin.user.model.BumenExample" resultType="java.lang.Long">
+    select count(*) from bumen
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update bumen
+    <set>
+      <if test="record.bumenId != null">
+        bumen_id = #{record.bumenId,jdbcType=INTEGER},
+      </if>
+      <if test="record.bumenName != null">
+        bumen_name = #{record.bumenName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bumenZhicheng != null">
+        bumen_zhicheng = #{record.bumenZhicheng,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bumenRenshu != null">
+        bumen_renshu = #{record.bumenRenshu,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update bumen
+    set bumen_id = #{record.bumenId,jdbcType=INTEGER},
+      bumen_name = #{record.bumenName,jdbcType=VARCHAR},
+      bumen_zhicheng = #{record.bumenZhicheng,jdbcType=VARCHAR},
+      bumen_renshu = #{record.bumenRenshu,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.one.ssm.admin.user.model.Bumen">
+    update bumen
+    <set>
+      <if test="bumenName != null">
+        bumen_name = #{bumenName,jdbcType=VARCHAR},
+      </if>
+      <if test="bumenZhicheng != null">
+        bumen_zhicheng = #{bumenZhicheng,jdbcType=VARCHAR},
+      </if>
+      <if test="bumenRenshu != null">
+        bumen_renshu = #{bumenRenshu,jdbcType=INTEGER},
+      </if>
+    </set>
+    where bumen_id = #{bumenId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.one.ssm.admin.user.model.Bumen">
+    update bumen
+    set bumen_name = #{bumenName,jdbcType=VARCHAR},
+      bumen_zhicheng = #{bumenZhicheng,jdbcType=VARCHAR},
+      bumen_renshu = #{bumenRenshu,jdbcType=INTEGER}
+    where bumen_id = #{bumenId,jdbcType=INTEGER}
+  </update>
+</mapper>
